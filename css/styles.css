@@ -41,6 +41,9 @@ h3 { margin-bottom: .4rem; font-size: 1.05rem; }
 .activity-card p { margin-bottom: 0; color: var(--muted); }
 .activity-icon { display: block; margin-bottom: 1rem; color: var(--muted); }
 .activity-layout { max-width: 720px; margin: 0 auto; }
+.about-page { max-width: 760px; }
+.about-copy { max-width: 660px; margin: 2rem auto 0; }
+.about-copy p { margin-bottom: 1.4rem; color: var(--muted); }
 .activity-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2rem; }
 .activity-top .back-link { margin-bottom: 0; }
 .activity-description { max-width: 520px; margin: 0; color: var(--muted); text-align: right; }
