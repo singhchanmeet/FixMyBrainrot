@@ -3,6 +3,7 @@ import { $, shuffle } from './shared.js';
 const SIZE = 9;
 const difficultyClues = { easy: 40, medium: 32, hard: 26 };
 let solution = [], puzzle = [], currentDifficulty = 'easy', selectedCell = null;
+const touchDevice = window.matchMedia('(pointer: coarse)').matches;
 
 function emptyBoard() { return Array.from({ length: SIZE }, () => Array(SIZE).fill(0)); }
 function isValid(board, row, col, value) {
@@ -42,7 +43,7 @@ function render() {
   puzzle.forEach((row, r) => row.forEach((value, c) => {
     const cell = document.createElement('input'); cell.className = 'sudoku-cell'; cell.type = 'text'; cell.inputMode = 'numeric'; cell.maxLength = 1; cell.dataset.row = r; cell.dataset.col = c; cell.setAttribute('aria-label', `Row ${r + 1}, column ${c + 1}`);
     if (value) { cell.value = value; cell.classList.add('given'); cell.disabled = true; }
-    else { cell.addEventListener('focus', () => selectCell(cell)); cell.addEventListener('click', () => selectCell(cell)); cell.addEventListener('input', () => validateCell(cell)); cell.addEventListener('keydown', event => { if (!/[1-9]|Backspace|Delete|Arrow/.test(event.key)) event.preventDefault(); }); }
+    else { if (touchDevice) { cell.readOnly = true; cell.inputMode = 'none'; } cell.addEventListener('focus', () => selectCell(cell)); cell.addEventListener('click', () => selectCell(cell)); cell.addEventListener('input', () => validateCell(cell)); cell.addEventListener('keydown', event => { if (!/[1-9]|Backspace|Delete|Arrow/.test(event.key)) event.preventDefault(); }); }
     grid.appendChild(cell);
   }));
 }
@@ -62,7 +63,7 @@ function highlightConflicts(row, col, value) {
     if (sameUnit && !(r === row && c === col) && readValue(cell) === value) cell.classList.add('conflict');
   }
 }
-function enterValue(value) { if (!selectedCell) return; selectedCell.value = value ? String(value) : ''; validateCell(selectedCell); selectedCell.focus(); }
+function enterValue(value) { if (!selectedCell) return; selectedCell.value = value ? String(value) : ''; validateCell(selectedCell); if (!touchDevice) selectedCell.focus(); }
 function newPuzzle() { selectedCell = null; try { ({ puzzle, solution } = generatePuzzle(difficultyClues[currentDifficulty])); render(); } catch (error) { console.error(error); } }
 
 $('#sudoku-difficulty').addEventListener('change', event => { currentDifficulty = event.target.value; newPuzzle(); });
