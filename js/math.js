@@ -17,5 +17,5 @@ $('#math-difficulty').addEventListener('change', nextProblem);
 $('#new-math').addEventListener('click', nextProblem);
 $('#math-answer').addEventListener('input', checkAnswer);
 if (touchDevice) { $('#math-answer').readOnly = true; $('#math-answer').inputMode = 'none'; }
-document.querySelectorAll('[data-math-key]').forEach(button => button.addEventListener('click', () => appendKey(button.dataset.mathKey)));
+document.querySelectorAll('[data-math-key]').forEach(button => button.addEventListener('click', () => { appendKey(button.dataset.mathKey); button.blur(); }));
 nextProblem();

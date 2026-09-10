@@ -68,5 +68,5 @@ function newPuzzle() { selectedCell = null; try { ({ puzzle, solution } = genera
 
 $('#sudoku-difficulty').addEventListener('change', event => { currentDifficulty = event.target.value; newPuzzle(); });
 $('#new-sudoku').addEventListener('click', newPuzzle);
-document.querySelectorAll('[data-number]').forEach(button => button.addEventListener('click', () => enterValue(Number(button.dataset.number))));
+document.querySelectorAll('[data-number]').forEach(button => button.addEventListener('click', () => { enterValue(Number(button.dataset.number)); button.blur(); }));
 newPuzzle();

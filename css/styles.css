@@ -55,7 +55,9 @@ label { display: grid; gap: .3rem; color: var(--muted); font-size: .9rem; }
 select, input[type="text"], input[type="number"] { min-height: 2.7rem; padding: .55rem .7rem; border: 1px solid #aaa; border-radius: 0; background: #fff; color: var(--ink); }
 button, .button { min-height: 2.7rem; padding: .55rem .9rem; border: 1px solid var(--ink); border-radius: 0; background: var(--ink); color: #fff; text-decoration: none; }
 button.secondary, .button.secondary { background: #fff; color: var(--ink); border-color: #aaa; }
-button:hover, .button:hover { opacity: .8; }
+@media (hover: hover) {
+  button:hover, .button:hover { opacity: .8; }
+}
 .status { min-height: 1.6rem; margin: 1rem 0 0; color: var(--muted); text-align: center; }
 .panel .status + .controls, .panel .status + button { margin-top: 1.25rem; }
 .panel > button { display: block; margin-left: auto; margin-right: auto; }
