@@ -2,15 +2,16 @@ import { $ } from './shared.js';
 import { answers, guesses } from '../assets/words/wordle.js';
 
 let target = '', row = 0, finished = false, current = 0;
+const touchDevice = window.matchMedia('(pointer: coarse)').matches;
 function draw() {
   const grid = $('#word-grid'); grid.innerHTML = '';
   for (let r = 0; r < 6; r++) for (let c = 0; c < 5; c++) {
-    const tile = document.createElement('input'); tile.className = 'word-tile'; tile.type = 'text'; tile.maxLength = 1; tile.autocomplete = 'off'; tile.spellcheck = false; tile.dataset.row = r; tile.dataset.col = c; tile.setAttribute('aria-label', `Guess ${r + 1}, letter ${c + 1}`);
+    const tile = document.createElement('input'); tile.className = 'word-tile'; tile.type = 'text'; tile.maxLength = 1; tile.autocomplete = 'off'; tile.spellcheck = false; tile.dataset.row = r; tile.dataset.col = c; tile.setAttribute('aria-label', `Guess ${r + 1}, letter ${c + 1}`); if (touchDevice) { tile.readOnly = true; tile.inputMode = 'none'; }
     tile.addEventListener('input', () => typeLetter(tile)); tile.addEventListener('keydown', event => handleKey(event, tile)); grid.appendChild(tile);
   }
   document.querySelectorAll('.keyboard-key').forEach(key => { key.className = key.classList.contains('wide') ? 'keyboard-key wide' : 'keyboard-key'; });
 }
-function start() { target = answers[Math.floor(Math.random() * answers.length)]; row = 0; current = 0; finished = false; draw(); $('#word-status').textContent = 'Six guesses.'; focusTile(0, 0); }
+function start() { target = answers[Math.floor(Math.random() * answers.length)]; row = 0; current = 0; finished = false; draw(); $('#word-status').textContent = 'Six guesses.'; if (!touchDevice) focusTile(0, 0); }
 function rowTiles() { return [...document.querySelectorAll(`.word-tile[data-row="${row}"]`)]; }
 function focusTile(r, c) { const tile = document.querySelector(`.word-tile[data-row="${r}"][data-col="${c}"]`); if (tile) tile.focus(); current = c; }
 function typeLetter(tile) { tile.value = tile.value.replace(/[^a-z]/gi, '').slice(-1).toUpperCase(); if (tile.value && Number(tile.dataset.col) < 4) focusTile(row, Number(tile.dataset.col) + 1); }
