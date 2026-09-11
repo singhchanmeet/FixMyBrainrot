@@ -1,14 +1,21 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Remember the Pattern — Fix My Brainrot</title>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Remember the Pattern — Fix My Brainrot</title>
   <meta name="description" content="Study a visual pattern, then recreate it from memory in this simple brain exercise.">
-  <meta name="robots" content="index,follow">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="robots" content="index,follow"><meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://fixmybrainrot.com/pattern.html">
-  <meta property="og:site_name" content="Fix My Brainrot">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Remember the Pattern — Fix My Brainrot">
-  <meta property="og:description" content="Study a visual pattern, then recreate it from memory in this simple brain exercise.">
-  <meta property="og:url" content="https://fixmybrainrot.com/pattern.html">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Remember the Pattern — Fix My Brainrot">
-  <meta name="twitter:description" content="Study a visual pattern, then recreate it from memory in this simple brain exercise.">
-<link rel="stylesheet" href="css/styles.css"></head><body><main class="page-main site-shell activity-layout"><div class="activity-top"><a class="back-link" href="index.html">← Activities</a><p class="activity-description">Look carefully, then reconstruct the highlighted cells.</p></div><section class="panel"><div class="controls"><label for="pattern-difficulty"><span class="sr-only">Difficulty</span><select id="pattern-difficulty"><option value="easy">Easy · 4×4</option><option value="medium">Medium · 5×5</option><option value="hard">Hard · 6×6</option></select></label></div><div id="pattern-grid" class="pattern-grid" aria-label="Pattern grid"></div><p id="pattern-status" class="status" aria-live="polite"></p><div class="controls"><button id="pattern-continue" type="button">I’m ready</button><button id="pattern-check" type="button" hidden>Check pattern</button><button id="pattern-new" class="secondary" type="button" hidden>New pattern</button></div></section></main><script type="module" src="js/pattern.js"></script></body></html>\n
+  <meta property="og:site_name" content="Fix My Brainrot"><meta property="og:type" content="website"><meta property="og:title" content="Remember the Pattern — Fix My Brainrot"><meta property="og:description" content="Study a visual pattern, then recreate it from memory in this simple brain exercise."><meta property="og:url" content="https://fixmybrainrot.com/pattern.html">
+  <meta name="twitter:card" content="summary"><meta name="twitter:title" content="Remember the Pattern — Fix My Brainrot"><meta name="twitter:description" content="Study a visual pattern, then recreate it from memory in this simple brain exercise.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="page-main site-shell activity-layout">
+    <div class="activity-top"><a class="back-link" href="index.html">← Activities</a><p class="activity-description">Look carefully, then reconstruct the highlighted cells. <button class="info-button" type="button" data-info-dialog="pattern-info" aria-label="How Remember the Pattern works">i</button></p></div>
+    <section class="panel"><div class="controls"><label for="pattern-difficulty"><span class="sr-only">Difficulty</span><select id="pattern-difficulty"><option value="easy">Easy · 4×4</option><option value="medium">Medium · 5×5</option><option value="hard">Hard · 6×6</option></select></label></div><div id="pattern-grid" class="pattern-grid" aria-label="Pattern grid"></div><p id="pattern-status" class="status" aria-live="polite"></p><div class="controls"><button id="pattern-continue" type="button">I’m ready</button><button id="pattern-check" type="button" hidden>Check pattern</button><button id="pattern-new" class="secondary" type="button" hidden>New pattern</button></div></section>
+  </main>
+  <dialog id="pattern-info" class="info-dialog" aria-labelledby="pattern-info-title"><div class="info-dialog-content"><h2 id="pattern-info-title">How it works</h2><p>Study the highlighted cells. Choose “I’m ready”, then click the cells you remember. Check your pattern when you are finished.</p><button class="secondary info-dialog-close" type="button" data-dialog-close>Close</button></div></dialog>
+  <script src="js/info-dialog.js"></script><script type="module" src="js/pattern.js"></script>
+</body>
+</html>

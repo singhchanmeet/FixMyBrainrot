@@ -1,14 +1,26 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mental Math — Fix My Brainrot</title>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mental Math — Fix My Brainrot</title>
   <meta name="description" content="Practice untimed mental arithmetic with simple problems that keep your mind actively engaged.">
-  <meta name="robots" content="index,follow">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="robots" content="index,follow"><meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://fixmybrainrot.com/mental-math.html">
-  <meta property="og:site_name" content="Fix My Brainrot">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Mental Math — Fix My Brainrot">
-  <meta property="og:description" content="Practice untimed mental arithmetic with simple problems that keep your mind actively engaged.">
-  <meta property="og:url" content="https://fixmybrainrot.com/mental-math.html">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Mental Math — Fix My Brainrot">
-  <meta name="twitter:description" content="Practice untimed mental arithmetic with simple problems that keep your mind actively engaged.">
-<link rel="stylesheet" href="css/styles.css"></head><body><main class="page-main site-shell activity-layout"><div class="activity-top"><a class="back-link" href="index.html">← Activities</a><p class="activity-description">Solve one problem at a time without any timer or score.</p></div><section class="panel"><div class="controls"><label for="math-difficulty"><span class="sr-only">Difficulty</span><select id="math-difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></label><button class="secondary" id="new-math" type="button">New problem</button></div><div id="math-problem" class="math-problem" aria-live="polite"></div><label class="math-answer" for="math-answer"><span class="sr-only">Your answer</span><input id="math-answer" type="tel" inputmode="numeric" autocomplete="off" aria-label="Your answer"></label><div class="math-keypad" aria-label="Number pad"><button type="button" data-math-key="1">1</button><button type="button" data-math-key="2">2</button><button type="button" data-math-key="3">3</button><button type="button" data-math-key="4">4</button><button type="button" data-math-key="5">5</button><button type="button" data-math-key="6">6</button><button type="button" data-math-key="7">7</button><button type="button" data-math-key="8">8</button><button type="button" data-math-key="9">9</button><button class="secondary" type="button" data-math-key="clear">Clear</button><button type="button" data-math-key="0">0</button><button class="secondary" type="button" data-math-key="backspace">⌫</button></div></section></main><script type="module" src="js/math.js"></script></body></html>\n
+  <meta property="og:site_name" content="Fix My Brainrot"><meta property="og:type" content="website"><meta property="og:title" content="Mental Math — Fix My Brainrot"><meta property="og:description" content="Practice untimed mental arithmetic with simple problems that keep your mind actively engaged."><meta property="og:url" content="https://fixmybrainrot.com/mental-math.html">
+  <meta name="twitter:card" content="summary"><meta name="twitter:title" content="Mental Math — Fix My Brainrot"><meta name="twitter:description" content="Practice untimed mental arithmetic with simple problems that keep your mind actively engaged.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="page-main site-shell activity-layout">
+    <div class="activity-top"><a class="back-link" href="index.html">← Activities</a><p class="activity-description">Solve one problem at a time without any timer or score. <button class="info-button" type="button" data-info-dialog="math-info" aria-label="How Mental Math works">i</button></p></div>
+    <section class="panel">
+      <div class="controls"><label for="math-difficulty"><span class="sr-only">Difficulty</span><select id="math-difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></label><button class="secondary" id="new-math" type="button">New problem</button></div>
+      <div id="math-problem" class="math-problem" aria-live="polite"></div>
+      <label class="math-answer" for="math-answer"><span class="sr-only">Your answer</span><input id="math-answer" type="tel" inputmode="numeric" autocomplete="off" aria-label="Your answer"></label>
+      <div class="math-keypad" aria-label="Number pad"><button type="button" data-math-key="1">1</button><button type="button" data-math-key="2">2</button><button type="button" data-math-key="3">3</button><button type="button" data-math-key="4">4</button><button type="button" data-math-key="5">5</button><button type="button" data-math-key="6">6</button><button type="button" data-math-key="7">7</button><button type="button" data-math-key="8">8</button><button type="button" data-math-key="9">9</button><button class="secondary" type="button" data-math-key="clear">Clear</button><button type="button" data-math-key="0">0</button><button class="secondary" type="button" data-math-key="backspace">⌫</button></div>
+    </section>
+  </main>
+  <dialog id="math-info" class="info-dialog" aria-labelledby="math-info-title"><div class="info-dialog-content"><h2 id="math-info-title">How it works</h2><p>Answer the problem using the keypad or your keyboard. A correct answer brings up the next problem. There is no timer or score.</p><button class="secondary info-dialog-close" type="button" data-dialog-close>Close</button></div></dialog>
+  <script src="js/info-dialog.js"></script><script type="module" src="js/math.js"></script>
+</body>
+</html>
