@@ -72,10 +72,10 @@ button.secondary, .button.secondary { background: #fff; color: var(--ink); borde
 /* Sudoku */
 .sudoku-grid { position: relative; display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); width: 100%; max-width: 560px; min-width: 0; margin: 1.5rem auto; overflow: hidden; border: 2px solid #555; }
 .sudoku-grid::before, .sudoku-grid::after { position: absolute; z-index: 2; display: block; pointer-events: none; content: ''; }
-.sudoku-grid::before { inset: 0; background: linear-gradient(to right, transparent calc(33.333% - 1.5px), #555 calc(33.333% - 1.5px), #555 calc(33.333% + 1.5px), transparent calc(33.333% + 1.5px), transparent calc(66.666% - 1.5px), #555 calc(66.666% - 1.5px), #555 calc(66.666% + 1.5px), transparent calc(66.666% + 1.5px)); }
-.sudoku-grid::after { inset: 0; background: linear-gradient(to bottom, transparent calc(33.333% - 1.5px), #555 calc(33.333% - 1.5px), #555 calc(33.333% + 1.5px), transparent calc(33.333% + 1.5px), transparent calc(66.666% - 1.5px), #555 calc(66.666% - 1.5px), #555 calc(66.666% + 1.5px), transparent calc(66.666% + 1.5px)); }
+.sudoku-grid::before { inset: 0; background: linear-gradient(to right, transparent calc(33.333% - 1px), #555 calc(33.333% - 1px), #555 calc(33.333% + 1px), transparent calc(33.333% + 1px), transparent calc(66.666% - 1px), #555 calc(66.666% - 1px), #555 calc(66.666% + 1px), transparent calc(66.666% + 1px)); }
+.sudoku-grid::after { inset: 0; background: linear-gradient(to bottom, transparent calc(33.333% - 1px), #555 calc(33.333% - 1px), #555 calc(33.333% + 1px), transparent calc(33.333% + 1px), transparent calc(66.666% - 1px), #555 calc(66.666% - 1px), #555 calc(66.666% + 1px), transparent calc(66.666% + 1px)); }
 .sudoku-cell { appearance: none; -webkit-appearance: none; display: block; width: 100%; height: 100%; aspect-ratio: 1; min-width: 0; min-height: 0; padding: 0 !important; border: 0; border-right: 1px solid #c8c8c8; border-bottom: 1px solid #c8c8c8; border-radius: 0; background: #fff; color: var(--ink); font-family: inherit; font-size: clamp(1rem, 5vw, 1.6rem); line-height: 1; text-align: center !important; text-indent: 0; }
-.sudoku-cell:nth-child(3n):not(:nth-child(9n)) { border-right: 3px solid #555; }
+.sudoku-cell:nth-child(3n):not(:nth-child(9n)) { border-right: 2px solid #555; }
 .sudoku-cell:nth-child(9n) { border-right: 0; }
 .sudoku-cell:nth-child(n+19):nth-child(-n+27), .sudoku-cell:nth-child(n+46):nth-child(-n+54) { border-bottom: 2px solid #555; }
 .sudoku-cell:nth-child(n+73) { border-bottom: 0; }
