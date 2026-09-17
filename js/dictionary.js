@@ -7,6 +7,7 @@ function nextWord() {
   $('#dictionary-word').textContent = entry.word;
   $('#dictionary-type').textContent = entry.partOfSpeech;
   $('#dictionary-definition').textContent = entry.definition;
+  $('#dictionary-example').textContent = entry.example ? `“${entry.example}”` : '';
 }
 $('#next-word').addEventListener('click', nextWord);
 nextWord();

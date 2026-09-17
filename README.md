@@ -33,7 +33,7 @@ Dictionary and Five Letters word data are bundled locally. To rebuild them, foll
 node scripts/build-word-assets.mjs
 ```
 
-The bundled word data has its own source and licensing information; it is documented separately from the project license.
+The bundled word data has its own source and licensing information; it is documented separately from the project license in [DATA-SOURCES.md](DATA-SOURCES.md) and [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
 ## Contributing
 

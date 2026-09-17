@@ -2,13 +2,26 @@
 
 ## Dictionary
 
-`assets/words/dictionary.js` is generated from the WordNet 3.0 database using `scripts/build-word-assets.mjs`.
+`assets/words/dictionary.js` is a filtered derivative of the Wordset Dictionary, generated using `scripts/build-word-assets.mjs`.
 
-- 77,034 unique word-definition entries
-- Definitions are derived from WordNet noun, verb, adjective, and adverb glosses
-- One concise definition is retained for each word
-- WordNet source: https://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz
-- License and attribution: https://wordnet.princeton.edu/license-and-commercial-use
+The full Wordset snapshot is downloaded from:
+
+https://github.com/wordset/wordset-dictionary
+
+The build currently produces:
+
+- 10,531 unique word-definition entries
+- lowercase alphabetic single words from 3 to 15 letters
+- noun, verb, adjective, and adverb entries only
+- one concise meaning per word, preferring meanings with an example sentence
+- entries with obsolete, archaic, rare, dialectal, regional, vulgar, offensive, slang, technical, medical, scientific, legal, mathematical, or derogatory labels excluded
+- a build-time English frequency threshold using `wordfreq` (Zipf frequency >= 3.4) to reduce obscure entries
+
+The dictionary page shows the selected definition and example sentence. The generated asset is bundled locally, so the activity does not need a dictionary API at runtime.
+
+Wordset is licensed under CC BY-SA 4.0. The Wordset repository also incorporates WordNet 3.0 material and includes Princeton University's separate WordNet notice. Both notices are preserved in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). The generated dictionary is a derivative database and remains subject to the applicable attribution and ShareAlike requirements.
+
+The `wordfreq` package is used only during asset generation to rank common vocabulary; its scoring data is not bundled. See its project and data licensing information at https://github.com/rspeer/wordfreq.
 
 ## Five Letters
 
@@ -27,8 +40,16 @@ The source corpus is distributed by the `dwyl/english-words` project under its p
 
 ## Rebuilding the assets
 
-Download the two source files described above, place them under `.asset-build/`, extract WordNet 3.0 to `.asset-build/WordNet-3.0/`, then run:
+Install the build-time frequency dependency:
+
+```text
+python -m pip install wordfreq
+```
+
+Clone or download the Wordset repository so its `data/` directory is available at `.asset-build/wordset-dictionary/data/`, then run:
 
 ```text
 node scripts/build-word-assets.mjs
 ```
+
+The build intentionally leaves `assets/words/wordle.js` unchanged. Wordle uses its existing separately documented word corpus and should only be regenerated as an explicit, separate change.
