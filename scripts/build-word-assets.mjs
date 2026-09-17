@@ -11,6 +11,8 @@ fs.mkdirSync(outputDir, { recursive: true });
 const allowedPartsOfSpeech = new Set(['noun', 'verb', 'adjective', 'adverb']);
 const excludedLabels = /archaic|obsolete|rare|dialect|regional|vulgar|offensive|slang|technical|medical|scientific|legal|mathematical|derogatory/i;
 const maxDefinitionLength = 220;
+const minFrequency = 3.5;
+const maxFrequency = 4.2;
 
 if (!fs.existsSync(wordsetDataDir)) throw new Error(`Wordset data not found: ${wordsetDataDir}`);
 
@@ -31,12 +33,12 @@ function cleanText(value) {
 const candidates = new Map();
 for (const entry of rawEntries) {
   const word = String(entry.word || '').toLowerCase();
-  if (!/^[a-z]{3,15}$/.test(word) || hasExcludedLabel(entry.labels)) continue;
+  if (!/^[a-z]{5,15}$/.test(word) || hasExcludedLabel(entry.labels)) continue;
 
   for (const meaning of entry.meanings || []) {
     if (!allowedPartsOfSpeech.has(meaning.speech_part) || hasExcludedLabel(meaning.labels)) continue;
     const definition = cleanText(meaning.def);
-    if (definition.length < 8 || definition.length > maxDefinitionLength) continue;
+    if (definition.length < 8 || definition.length > maxDefinitionLength || /[()[\]]/.test(definition)) continue;
     const example = cleanText(meaning.example);
     const candidate = {
       word,
@@ -58,18 +60,18 @@ const frequencyResult = spawnSync(process.env.PYTHON || 'python', ['-c', frequen
 if (frequencyResult.status !== 0) throw new Error(`wordfreq is required to build dictionary assets. Install it with: python -m pip install wordfreq\n${frequencyResult.stderr}`);
 const frequencies = JSON.parse(frequencyResult.stdout);
 function frequencyBand(frequency) {
-  if (frequency >= 4.7) return 'common';
-  if (frequency >= 4) return 'medium';
+  if (frequency >= 4.1) return 'common';
+  if (frequency >= 3.8) return 'medium';
   return 'less-common';
 }
 
 const dictionary = [...candidates.values()]
   .map((entry, index) => ({ ...entry, frequency: frequencies[index] }))
-  .filter((entry) => entry.frequency >= 3.4)
+  .filter((entry) => entry.frequency >= minFrequency && entry.frequency < maxFrequency)
   .sort((a, b) => a.word.localeCompare(b.word))
   .map(({ score, frequency, ...entry }) => ({ ...entry, frequencyBand: frequencyBand(frequency) }));
 
-if (dictionary.length < 5000) throw new Error(`Unexpected dictionary size: ${dictionary.length} entries`);
+if (dictionary.length < 4000) throw new Error(`Unexpected dictionary size: ${dictionary.length} entries`);
 
 fs.writeFileSync(path.join(outputDir, 'dictionary.js'), `const words = ${JSON.stringify(dictionary)};\nexport default words;\n`);
 console.log(JSON.stringify({ sourceEntries: rawEntries.length, candidateWords: candidates.size, dictionary: dictionary.length }));

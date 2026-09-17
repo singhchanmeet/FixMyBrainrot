@@ -11,14 +11,14 @@ https://github.com/wordset/wordset-dictionary
 The build currently produces:
 
 - 10,531 unique word-definition entries
-- lowercase alphabetic single words from 3 to 15 letters
+- lowercase alphabetic single words from 5 to 15 letters
 - noun, verb, adjective, and adverb entries only
 - one concise meaning per word, preferring meanings with an example sentence
 - entries with obsolete, archaic, rare, dialectal, regional, vulgar, offensive, slang, technical, medical, scientific, legal, mathematical, or derogatory labels excluded
-- a build-time English frequency threshold using `wordfreq` (Zipf frequency >= 3.4) to reduce obscure entries
+- a build-time English frequency band using `wordfreq` (Zipf frequency 3.5–4.19) to avoid both extremely common and genuinely obscure entries
 - runtime selection weighted toward less-common and medium-frequency words, with a smaller share of very common words
 
-The dictionary page shows the selected definition and example sentence. Entries are internally grouped into less-common (Zipf 3.4–3.99), medium-frequency (4.0–4.69), and common (4.7+) bands. The activity samples those bands at approximately 50%, 35%, and 15%, respectively. The generated asset is bundled locally, so the activity does not need a dictionary API at runtime.
+The dictionary page shows the selected definition and example sentence. Entries are internally grouped into less-common (Zipf 3.5–3.79), medium-frequency (3.8–4.09), and common-within-the-learning-range (4.1–4.19) bands. The activity samples those bands at approximately 50%, 35%, and 15%, respectively. The generated asset is bundled locally, so the activity does not need a dictionary API at runtime.
 
 Wordset is licensed under CC BY-SA 4.0. The Wordset repository also incorporates WordNet 3.0 material and includes Princeton University's separate WordNet notice. Both notices are preserved in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). The generated dictionary is a derivative database and remains subject to the applicable attribution and ShareAlike requirements.
 
