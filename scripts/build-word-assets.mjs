@@ -57,11 +57,17 @@ const frequencyResult = spawnSync(process.env.PYTHON || 'python', ['-c', frequen
 });
 if (frequencyResult.status !== 0) throw new Error(`wordfreq is required to build dictionary assets. Install it with: python -m pip install wordfreq\n${frequencyResult.stderr}`);
 const frequencies = JSON.parse(frequencyResult.stdout);
+function frequencyBand(frequency) {
+  if (frequency >= 4.7) return 'common';
+  if (frequency >= 4) return 'medium';
+  return 'less-common';
+}
+
 const dictionary = [...candidates.values()]
   .map((entry, index) => ({ ...entry, frequency: frequencies[index] }))
   .filter((entry) => entry.frequency >= 3.4)
   .sort((a, b) => a.word.localeCompare(b.word))
-  .map(({ score, frequency, ...entry }) => entry);
+  .map(({ score, frequency, ...entry }) => ({ ...entry, frequencyBand: frequencyBand(frequency) }));
 
 if (dictionary.length < 5000) throw new Error(`Unexpected dictionary size: ${dictionary.length} entries`);
 
