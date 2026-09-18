@@ -124,7 +124,6 @@ function renderKeypad() {
   clear.textContent = 'Clear';
   clear.addEventListener('click', () => { enterValue(0); clear.blur(); });
   keypad.append(clear);
-  keypad.style.gridTemplateColumns = `repeat(${Math.min(5, puzzle.size + 1)}, minmax(2.7rem, 3.5rem))`;
 }
 
 function newPuzzle() {

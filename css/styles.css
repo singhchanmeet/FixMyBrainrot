@@ -96,8 +96,8 @@ button.secondary, .button.secondary { background: #fff; color: var(--ink); borde
 .futoshiki-inequality { display: grid; min-width: 0; min-height: 0; place-items: center; color: var(--muted); font-size: clamp(.85rem, 4vw, 1.3rem); font-weight: 700; }
 .futoshiki-inequality.violation { color: var(--error); }
 .futoshiki-intersection { min-width: 0; min-height: 0; }
-.futoshiki-keypad { display: grid; justify-content: center; gap: .5rem; margin: 1rem auto; }
-.futoshiki-keypad button { min-height: 2.7rem; }
+.futoshiki-keypad { display: flex; flex-wrap: wrap; width: min(100%, 19.5rem); justify-content: center; gap: .5rem; margin: 1rem auto; }
+.futoshiki-keypad button { width: 3.5rem; min-height: 2.7rem; }
 
 /* Wordle */
 .word-grid { display: grid; grid-template-columns: repeat(5, minmax(2.9rem, 3.6rem)); gap: .4rem; justify-content: center; margin: 1.5rem 0; }
