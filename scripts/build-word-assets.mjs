@@ -91,4 +91,17 @@ const anagramGroups = [...anagramWords.reduce((groups, entry) => {
 
 if (anagramGroups.length < 50) throw new Error(`Unexpected anagram group count: ${anagramGroups.length}`);
 fs.writeFileSync(path.join(outputDir, 'anagrams.js'), `const anagramGroups = ${JSON.stringify(anagramGroups)};\nexport default anagramGroups;\n`);
+const playableSignatures = new Set(anagramGroups.map((group) => [...group[0].word].sort().join('')));
+const acceptedAnagramWords = scoredCandidates.filter((entry) => {
+  if (entry.frequency < 3 || !Number.isFinite(entry.frequency) || anagramExcludedWords.has(entry.word)) return false;
+  if (entry.word.length < 6 || entry.word.length > 12) return false;
+  return playableSignatures.has([...entry.word].sort().join(''));
+});
+const acceptedAnagrams = acceptedAnagramWords.reduce((groups, entry) => {
+  const signature = [...entry.word].sort().join('');
+  if (!groups[signature]) groups[signature] = [];
+  groups[signature].push(entry.word);
+  return groups;
+}, {});
+fs.writeFileSync(path.join(outputDir, 'anagram-answers.js'), `const anagramAnswers = ${JSON.stringify(acceptedAnagrams)};\nexport default anagramAnswers;\n`);
 console.log(JSON.stringify({ sourceEntries: rawEntries.length, candidateWords: candidates.size, dictionary: dictionary.length, anagramGroups: anagramGroups.length, anagramWords: anagramGroups.flat().length }));

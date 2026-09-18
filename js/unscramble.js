@@ -1,5 +1,6 @@
 import { $, shuffle } from './shared.js';
 import anagramGroups from '../assets/words/anagrams.js';
+import anagramAnswers from '../assets/words/anagram-answers.js';
 
 const bank = $('#letter-bank');
 const answer = $('#answer-slots');
@@ -8,11 +9,8 @@ const backspaceButton = $('#backspace-answer');
 const newWordButton = $('#new-anagram');
 const difficultySelect = $('#anagram-difficulty');
 const status = $('#anagram-status');
-const result = $('#anagram-result');
-const definition = $('#anagram-definition');
-const example = $('#anagram-example');
 
-const allWords = new Set(anagramGroups.flat().map(({ word }) => word));
+const allWords = new Set(Object.values(anagramAnswers).flat());
 const difficultyRanges = {
   easy: [6, 6],
   medium: [7, 7],
@@ -83,12 +81,8 @@ function removeLetter(answerIndex) {
 
 function checkAnswer() {
   const guess = selectedLetters.map((index) => currentPuzzle.letters[index]).join('');
-  const answerEntry = currentPuzzle.answers.find(({ word }) => word === guess);
-  if (answerEntry) {
+  if (anagramAnswers[currentPuzzle.signature]?.includes(guess)) {
     solved = true;
-    definition.textContent = answerEntry.definition;
-    example.textContent = answerEntry.example ? `“${answerEntry.example}”` : '';
-    result.hidden = false;
     setStatus('Correct.', 'success');
     render();
     newWordButton.focus();
@@ -110,12 +104,9 @@ function nextPuzzle() {
   if (!remainingGroups.length || remainingGroups.some(group => !availableGroups.includes(group))) remainingGroups = shuffle(availableGroups);
   const group = remainingGroups.pop();
   const entry = group[Math.floor(Math.random() * group.length)];
-  currentPuzzle = { answers: group, word: entry.word, letters: [...scrambleWord(entry.word)] };
+  currentPuzzle = { word: entry.word, signature: [...entry.word].sort().join(''), letters: [...scrambleWord(entry.word)] };
   selectedLetters = [];
   solved = false;
-  result.hidden = true;
-  definition.textContent = '';
-  example.textContent = '';
   setStatus();
   render();
 }
