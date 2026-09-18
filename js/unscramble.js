@@ -9,8 +9,11 @@ const backspaceButton = $('#backspace-answer');
 const newWordButton = $('#new-anagram');
 const difficultySelect = $('#anagram-difficulty');
 const status = $('#anagram-status');
+const result = $('#anagram-result');
+const definition = $('#anagram-definition');
+const example = $('#anagram-example');
 
-const allWords = new Set(Object.values(anagramAnswers).flat());
+const allWords = new Set(Object.values(anagramAnswers).flat().map(({ word }) => word));
 const difficultyRanges = {
   easy: [5, 6],
   medium: [7, 7],
@@ -81,8 +84,12 @@ function removeLetter(answerIndex) {
 
 function checkAnswer() {
   const guess = selectedLetters.map((index) => currentPuzzle.letters[index]).join('');
-  if (anagramAnswers[currentPuzzle.signature]?.includes(guess)) {
+  const answerEntry = anagramAnswers[currentPuzzle.signature]?.find(({ word }) => word === guess);
+  if (answerEntry) {
     solved = true;
+    definition.textContent = answerEntry.definition;
+    example.textContent = answerEntry.example ? `“${answerEntry.example}”` : '';
+    result.hidden = false;
     setStatus('Correct.', 'success');
     render();
     newWordButton.focus();
@@ -107,6 +114,9 @@ function nextPuzzle() {
   currentPuzzle = { word: entry.word, signature: [...entry.word].sort().join(''), letters: [...scrambleWord(entry.word)] };
   selectedLetters = [];
   solved = false;
+  result.hidden = true;
+  definition.textContent = '';
+  example.textContent = '';
   setStatus();
   render();
 }

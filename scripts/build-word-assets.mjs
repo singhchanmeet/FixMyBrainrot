@@ -78,7 +78,7 @@ if (dictionary.length < 4000) throw new Error(`Unexpected dictionary size: ${dic
 
 fs.writeFileSync(path.join(outputDir, 'dictionary.js'), `const words = ${JSON.stringify(dictionary)};\nexport default words;\n`);
 
-const anagramWords = scoredCandidates.filter((entry) => entry.frequency >= 3 && entry.frequency < 5.5 && !anagramExcludedWords.has(entry.word));
+const anagramWords = scoredCandidates.filter((entry) => entry.frequency >= 3 && entry.frequency < 5.8 && !anagramExcludedWords.has(entry.word));
 const anagramGroups = [...anagramWords.reduce((groups, entry) => {
   if (entry.word.length < 5 || entry.word.length > 12) return groups;
   const signature = [...entry.word].sort().join('');
@@ -93,14 +93,14 @@ if (anagramGroups.length < 50) throw new Error(`Unexpected anagram group count: 
 fs.writeFileSync(path.join(outputDir, 'anagrams.js'), `const anagramGroups = ${JSON.stringify(anagramGroups)};\nexport default anagramGroups;\n`);
 const playableSignatures = new Set(anagramGroups.map((group) => [...group[0].word].sort().join('')));
 const acceptedAnagramWords = scoredCandidates.filter((entry) => {
-  if (entry.frequency < 3 || entry.frequency >= 5.5 || !Number.isFinite(entry.frequency) || anagramExcludedWords.has(entry.word)) return false;
+  if (entry.frequency < 3 || entry.frequency >= 5.8 || !Number.isFinite(entry.frequency) || anagramExcludedWords.has(entry.word)) return false;
   if (entry.word.length < 5 || entry.word.length > 12) return false;
   return playableSignatures.has([...entry.word].sort().join(''));
 });
 const acceptedAnagrams = acceptedAnagramWords.reduce((groups, entry) => {
   const signature = [...entry.word].sort().join('');
   if (!groups[signature]) groups[signature] = [];
-  groups[signature].push(entry.word);
+  groups[signature].push({ word: entry.word, definition: entry.definition, ...(entry.example ? { example: entry.example } : {}) });
   return groups;
 }, {});
 fs.writeFileSync(path.join(outputDir, 'anagram-answers.js'), `const anagramAnswers = ${JSON.stringify(acceptedAnagrams)};\nexport default anagramAnswers;\n`);
