@@ -78,9 +78,9 @@ if (dictionary.length < 4000) throw new Error(`Unexpected dictionary size: ${dic
 
 fs.writeFileSync(path.join(outputDir, 'dictionary.js'), `const words = ${JSON.stringify(dictionary)};\nexport default words;\n`);
 
-const anagramWords = scoredCandidates.filter((entry) => entry.frequency >= 3.2 && entry.frequency < maxFrequency && !anagramExcludedWords.has(entry.word));
+const anagramWords = scoredCandidates.filter((entry) => entry.frequency >= 3 && entry.frequency < 5.5 && !anagramExcludedWords.has(entry.word));
 const anagramGroups = [...anagramWords.reduce((groups, entry) => {
-  if (entry.word.length < 6 || entry.word.length > 12) return groups;
+  if (entry.word.length < 5 || entry.word.length > 12) return groups;
   const signature = [...entry.word].sort().join('');
   if (!groups.has(signature)) groups.set(signature, []);
   groups.get(signature).push(entry);
@@ -93,8 +93,8 @@ if (anagramGroups.length < 50) throw new Error(`Unexpected anagram group count: 
 fs.writeFileSync(path.join(outputDir, 'anagrams.js'), `const anagramGroups = ${JSON.stringify(anagramGroups)};\nexport default anagramGroups;\n`);
 const playableSignatures = new Set(anagramGroups.map((group) => [...group[0].word].sort().join('')));
 const acceptedAnagramWords = scoredCandidates.filter((entry) => {
-  if (entry.frequency < 3 || !Number.isFinite(entry.frequency) || anagramExcludedWords.has(entry.word)) return false;
-  if (entry.word.length < 6 || entry.word.length > 12) return false;
+  if (entry.frequency < 3 || entry.frequency >= 5.5 || !Number.isFinite(entry.frequency) || anagramExcludedWords.has(entry.word)) return false;
+  if (entry.word.length < 5 || entry.word.length > 12) return false;
   return playableSignatures.has([...entry.word].sort().join(''));
 });
 const acceptedAnagrams = acceptedAnagramWords.reduce((groups, entry) => {

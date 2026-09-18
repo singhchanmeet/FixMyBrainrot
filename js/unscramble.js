@@ -12,7 +12,7 @@ const status = $('#anagram-status');
 
 const allWords = new Set(Object.values(anagramAnswers).flat());
 const difficultyRanges = {
-  easy: [6, 6],
+  easy: [5, 6],
   medium: [7, 7],
   hard: [8, 10]
 };
