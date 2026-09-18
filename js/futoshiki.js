@@ -80,7 +80,11 @@ function render() {
         const inequalityIndex = inequalityAt(a, b);
         if (inequalityIndex !== -1) {
           const inequality = puzzle.inequalities[inequalityIndex];
-          element.textContent = inequality.a === a ? inequality.operator : inequality.operator === '<' ? '>' : '<';
+          if (row % 2 === 0) {
+            element.textContent = inequality.a === a ? inequality.operator : inequality.operator === '<' ? '>' : '<';
+          } else {
+            element.textContent = inequality.a === a ? inequality.operator === '<' ? '∧' : '∨' : inequality.operator === '<' ? '∨' : '∧';
+          }
           element.setAttribute('aria-label', `Inequality ${element.textContent}`);
           if (feedback.violations.has(inequalityIndex)) element.classList.add('violation');
         }
