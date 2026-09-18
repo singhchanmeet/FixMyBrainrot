@@ -101,7 +101,7 @@ function nextPuzzle() {
   if (!remainingGroups.length) remainingGroups = shuffle(anagramGroups);
   const group = remainingGroups.pop();
   const entry = group[Math.floor(Math.random() * group.length)];
-  currentPuzzle = { ...entry, letters: scrambleWord(entry.word) };
+  currentPuzzle = { ...entry, letters: [...scrambleWord(entry.word)] };
   selectedLetters = [];
   solved = false;
   result.hidden = true;
