@@ -119,6 +119,8 @@ button.secondary, .button.secondary { background: #fff; color: var(--ink); borde
 
 /* Unscramble */
 .unscramble-panel { text-align: center; }
+.anagram-settings { display: flex; justify-content: center; margin-bottom: 1rem; }
+.anagram-settings label { display: block; }
 .anagram-letter-bank, .anagram-answer { display: flex; flex-wrap: wrap; justify-content: center; gap: .45rem; min-height: 3.3rem; }
 .anagram-letter-bank { margin: 1rem auto 1.5rem; }
 .anagram-letter, .anagram-answer-letter { width: 2.8rem; min-height: 3rem; padding: .4rem; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; }

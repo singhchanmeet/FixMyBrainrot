@@ -25,17 +25,27 @@
       <p class="activity-description"><span>Rearrange the letters to find the word.</span><button class="info-button" type="button" data-info-dialog="unscramble-info" aria-label="How Unscramble works"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 10.5v5.25M12 7.5h.01" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path></svg></button></p>
     </div>
     <section class="panel unscramble-panel">
+      <div class="anagram-settings">
+        <label>
+          <span class="sr-only">Difficulty</span>
+          <select id="anagram-difficulty" aria-label="Difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </label>
+      </div>
       <div id="letter-bank" class="anagram-letter-bank" role="group" aria-label="Scrambled letters"></div>
       <div id="answer-slots" class="anagram-answer" aria-live="polite" aria-label="Your answer"></div>
       <div class="anagram-controls">
         <button id="clear-answer" class="secondary" type="button">Clear</button>
         <button id="backspace-answer" class="secondary" type="button">Backspace</button>
+        <button id="new-anagram" class="secondary" type="button">New word</button>
       </div>
       <p id="anagram-status" class="status" role="status"></p>
       <div id="anagram-result" class="anagram-result" hidden>
         <p id="anagram-definition" class="intro"></p>
         <p id="anagram-example" class="definition-example"></p>
-        <button id="next-anagram" type="button">Next word</button>
       </div>
     </section>
   </main>

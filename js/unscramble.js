@@ -5,13 +5,19 @@ const bank = $('#letter-bank');
 const answer = $('#answer-slots');
 const clearButton = $('#clear-answer');
 const backspaceButton = $('#backspace-answer');
+const newWordButton = $('#new-anagram');
+const difficultySelect = $('#anagram-difficulty');
 const status = $('#anagram-status');
 const result = $('#anagram-result');
 const definition = $('#anagram-definition');
 const example = $('#anagram-example');
-const nextButton = $('#next-anagram');
 
 const allWords = new Set(anagramGroups.flat().map(({ word }) => word));
+const difficultyRanges = {
+  easy: [6, 6],
+  medium: [7, 7],
+  hard: [8, 10]
+};
 let remainingGroups = [];
 let currentPuzzle;
 let selectedLetters = [];
@@ -77,14 +83,15 @@ function removeLetter(answerIndex) {
 
 function checkAnswer() {
   const guess = selectedLetters.map((index) => currentPuzzle.letters[index]).join('');
-  if (guess === currentPuzzle.word) {
+  const answerEntry = currentPuzzle.answers.find(({ word }) => word === guess);
+  if (answerEntry) {
     solved = true;
-    definition.textContent = currentPuzzle.definition;
-    example.textContent = currentPuzzle.example ? `“${currentPuzzle.example}”` : '';
+    definition.textContent = answerEntry.definition;
+    example.textContent = answerEntry.example ? `“${answerEntry.example}”` : '';
     result.hidden = false;
     setStatus('Correct.', 'success');
     render();
-    nextButton.focus();
+    newWordButton.focus();
   } else {
     setStatus('Not quite. Try again.', 'error');
   }
@@ -98,10 +105,12 @@ function clearAnswer() {
 }
 
 function nextPuzzle() {
-  if (!remainingGroups.length) remainingGroups = shuffle(anagramGroups);
+  const [minimumLength, maximumLength] = difficultyRanges[difficultySelect.value];
+  const availableGroups = anagramGroups.filter(group => group[0].word.length >= minimumLength && group[0].word.length <= maximumLength);
+  if (!remainingGroups.length || remainingGroups.some(group => !availableGroups.includes(group))) remainingGroups = shuffle(availableGroups);
   const group = remainingGroups.pop();
   const entry = group[Math.floor(Math.random() * group.length)];
-  currentPuzzle = { ...entry, letters: [...scrambleWord(entry.word)] };
+  currentPuzzle = { answers: group, word: entry.word, letters: [...scrambleWord(entry.word)] };
   selectedLetters = [];
   solved = false;
   result.hidden = true;
@@ -141,5 +150,9 @@ backspaceButton.addEventListener('click', () => {
   setStatus();
   render();
 });
-nextButton.addEventListener('click', nextPuzzle);
+newWordButton.addEventListener('click', nextPuzzle);
+difficultySelect.addEventListener('change', () => {
+  remainingGroups = [];
+  nextPuzzle();
+});
 nextPuzzle();
