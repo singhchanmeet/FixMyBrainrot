@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Futoshiki — Fix My Brainrot</title>
+  <meta name="description" content="Solve a browser-generated Futoshiki puzzle using numbers and inequalities.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://fixmybrainrot.com/futoshiki.html">
+  <meta property="og:site_name" content="Fix My Brainrot">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Futoshiki — Fix My Brainrot">
+  <meta property="og:description" content="Solve a browser-generated Futoshiki puzzle using numbers and inequalities.">
+  <meta property="og:url" content="https://fixmybrainrot.com/futoshiki.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Futoshiki — Fix My Brainrot">
+  <meta name="twitter:description" content="Solve a browser-generated Futoshiki puzzle using numbers and inequalities.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="page-main site-shell activity-layout">
+    <div class="activity-top"><a class="back-link" href="index.html">← Activities</a><p class="activity-description"><span>Fill the grid while obeying every inequality.</span><button class="info-button" type="button" data-info-dialog="futoshiki-info" aria-label="How Futoshiki works"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 10.5v5.25M12 7.5h.01" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path></svg></button></p></div>
+    <section class="panel futoshiki-panel">
+      <div class="controls"><label for="futoshiki-difficulty"><span class="sr-only">Difficulty</span><select id="futoshiki-difficulty"><option value="easy" selected>Easy · 4×4</option><option value="medium">Medium · 5×5</option><option value="hard">Hard · 6×6</option></select></label><button class="secondary" id="new-futoshiki" type="button">New puzzle</button></div>
+      <div class="futoshiki-grid" aria-label="Futoshiki grid"></div>
+      <div class="futoshiki-keypad" aria-label="Number pad"></div>
+      <p id="futoshiki-status" class="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <dialog id="futoshiki-info" class="info-dialog" aria-labelledby="futoshiki-info-title"><div class="info-dialog-content"><h2 id="futoshiki-info-title">How it works</h2><ul><li>Fill every row and column with the numbers from 1 to the grid size.</li><li>No number can repeat in a row or column.</li><li>Follow every less-than and greater-than sign between neighboring cells.</li></ul><button class="secondary info-dialog-close" type="button" data-dialog-close>Close</button></div></dialog>
+  <script src="js/info-dialog.js"></script><script type="module" src="js/futoshiki.js"></script>
+</body>
+</html>

@@ -10,6 +10,7 @@ It is a small static website built with plain HTML, CSS, and JavaScript. It has 
 - Unscramble — rearrange letters to find a word
 - Mental Math — solve untimed arithmetic problems
 - Sudoku — play browser-generated puzzles with unique solutions
+- Futoshiki — solve browser-generated inequality puzzles with unique solutions
 - Wikipedia — read a short introduction to a random Wikipedia article
 - Remember the Pattern — observe and reconstruct a visual pattern
 - Five Letters — solve a five-letter Wordle-style word in six guesses
