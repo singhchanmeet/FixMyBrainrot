@@ -10,6 +10,7 @@ fs.mkdirSync(outputDir, { recursive: true });
 
 const allowedPartsOfSpeech = new Set(['noun', 'verb', 'adjective', 'adverb']);
 const excludedLabels = /archaic|obsolete|rare|dialect|regional|vulgar|offensive|slang|technical|medical|scientific|legal|mathematical|derogatory/i;
+const anagramExcludedWords = new Set(['belgian', 'bengali', 'geneva', 'herpes', 'marian', 'marina', 'medina', 'retard', 'siemens']);
 const maxDefinitionLength = 220;
 const minFrequency = 3.5;
 const maxFrequency = 4.2;
@@ -65,8 +66,10 @@ function frequencyBand(frequency) {
   return 'less-common';
 }
 
-const dictionary = [...candidates.values()]
-  .map((entry, index) => ({ ...entry, frequency: frequencies[index] }))
+const scoredCandidates = [...candidates.values()]
+  .map((entry, index) => ({ ...entry, frequency: frequencies[index] }));
+
+const dictionary = scoredCandidates
   .filter((entry) => entry.frequency >= minFrequency && entry.frequency < maxFrequency)
   .sort((a, b) => a.word.localeCompare(b.word))
   .map(({ score, frequency, ...entry }) => ({ ...entry, frequencyBand: frequencyBand(frequency) }));
@@ -74,4 +77,18 @@ const dictionary = [...candidates.values()]
 if (dictionary.length < 4000) throw new Error(`Unexpected dictionary size: ${dictionary.length} entries`);
 
 fs.writeFileSync(path.join(outputDir, 'dictionary.js'), `const words = ${JSON.stringify(dictionary)};\nexport default words;\n`);
-console.log(JSON.stringify({ sourceEntries: rawEntries.length, candidateWords: candidates.size, dictionary: dictionary.length }));
+
+const anagramWords = scoredCandidates.filter((entry) => entry.frequency >= 3.2 && entry.frequency < maxFrequency && !anagramExcludedWords.has(entry.word));
+const anagramGroups = [...anagramWords.reduce((groups, entry) => {
+  if (entry.word.length < 6 || entry.word.length > 12) return groups;
+  const signature = [...entry.word].sort().join('');
+  if (!groups.has(signature)) groups.set(signature, []);
+  groups.get(signature).push(entry);
+  return groups;
+}, new Map()).values()]
+  .filter((group) => group.length >= 2)
+  .map((group) => group.map(({ word, definition, example }) => ({ word, definition, ...(example ? { example } : {}) })));
+
+if (anagramGroups.length < 50) throw new Error(`Unexpected anagram group count: ${anagramGroups.length}`);
+fs.writeFileSync(path.join(outputDir, 'anagrams.js'), `const anagramGroups = ${JSON.stringify(anagramGroups)};\nexport default anagramGroups;\n`);
+console.log(JSON.stringify({ sourceEntries: rawEntries.length, candidateWords: candidates.size, dictionary: dictionary.length, anagramGroups: anagramGroups.length, anagramWords: anagramGroups.flat().length }));

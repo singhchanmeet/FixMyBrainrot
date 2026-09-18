@@ -7,6 +7,7 @@ It is a small static website built with plain HTML, CSS, and JavaScript. It has 
 ## Activities
 
 - Dictionary — learn a random word and its meaning
+- Unscramble — rearrange letters to find a word
 - Mental Math — solve untimed arithmetic problems
 - Sudoku — play browser-generated puzzles with unique solutions
 - Wikipedia — read a short introduction to a random Wikipedia article

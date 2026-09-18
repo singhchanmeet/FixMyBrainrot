@@ -54,3 +54,7 @@ node scripts/build-word-assets.mjs
 ```
 
 The build intentionally leaves `assets/words/wordle.js` unchanged. Wordle uses its existing separately documented word corpus and should only be regenerated as an explicit, separate change.
+
+## Unscramble
+
+`assets/words/anagrams.js` is generated from the Wordset-derived candidates during the same build. It contains groups of distinct 6–12 letter words with the same letter signature. The anagram pool uses a slightly broader frequency floor than Dictionary so that enough meaningful groups are available, while retaining the same structural and label-based quality filters. A small explicit exclusion list removes poor puzzle candidates such as proper-name-like entries, a trademark, a medical term, and an offensive term.

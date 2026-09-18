@@ -117,6 +117,20 @@ button.secondary, .button.secondary { background: #fff; color: var(--ink); borde
 .math-answer input { width: 100%; text-align: center; font-size: 1.5rem; }
 .math-keypad { display: grid; grid-template-columns: repeat(3, minmax(3rem, 4rem)); justify-content: center; gap: .5rem; margin: 1rem auto; }
 
+/* Unscramble */
+.unscramble-panel { text-align: center; }
+.anagram-letter-bank, .anagram-answer { display: flex; flex-wrap: wrap; justify-content: center; gap: .45rem; min-height: 3.3rem; }
+.anagram-letter-bank { margin: 1rem auto 1.5rem; }
+.anagram-letter, .anagram-answer-letter { width: 2.8rem; min-height: 3rem; padding: .4rem; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; }
+.anagram-letter:disabled { opacity: .25; }
+.anagram-answer { align-items: center; min-height: 3.4rem; padding: .35rem; border-bottom: 1px solid var(--line); }
+.anagram-answer:empty::before { color: var(--muted); content: 'Your answer'; font-size: .95rem; }
+.anagram-answer-letter { background: #fff; color: var(--ink); border-color: #aaa; }
+.anagram-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin: 1.25rem auto .25rem; }
+.anagram-result { margin-top: 1.5rem; }
+.anagram-result .intro { margin: 0 auto 1rem; }
+.anagram-result .definition-example { margin-top: 0; }
+
 @media (min-width: 680px) {
   .site-shell { width: min(100% - 4rem, 1080px); }
   .site-header { padding-top: 2rem; }
