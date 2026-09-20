@@ -137,6 +137,7 @@ function newPuzzle() {
 }
 
 document.addEventListener('keydown', (event) => {
+  if (event.target.closest('select, input, textarea')) return;
   if (selectedCell === null) return;
   if (/^[1-9]$/.test(event.key) && Number(event.key) <= puzzle.size) {
     event.preventDefault();
@@ -160,6 +161,5 @@ document.addEventListener('keydown', (event) => {
 
 difficulty.addEventListener('change', newPuzzle);
 newPuzzleButton.addEventListener('click', newPuzzle);
-newPuzzle();
-
 if (!FUTOSHIKI_MODES[difficulty.value]) difficulty.value = 'easy';
+newPuzzle();

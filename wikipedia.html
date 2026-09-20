@@ -5,14 +5,15 @@
   <title>Wikipedia — Fix My Brainrot</title>
   <meta name="description" content="Read a random Wikipedia article selected for a useful, readable introduction.">
   <meta name="robots" content="index,follow"><meta name="theme-color" content="#ffffff">
-  <link rel="canonical" href="https://fixmybrainrot.com/wikipedia.html">
-  <meta property="og:site_name" content="Fix My Brainrot"><meta property="og:type" content="website"><meta property="og:title" content="Wikipedia — Fix My Brainrot"><meta property="og:description" content="Read a random Wikipedia article selected for a useful, readable introduction."><meta property="og:url" content="https://fixmybrainrot.com/wikipedia.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://fixmybrainrot.com/wikipedia">
+  <meta property="og:site_name" content="Fix My Brainrot"><meta property="og:type" content="website"><meta property="og:title" content="Wikipedia — Fix My Brainrot"><meta property="og:description" content="Read a random Wikipedia article selected for a useful, readable introduction."><meta property="og:url" content="https://fixmybrainrot.com/wikipedia">
   <meta name="twitter:card" content="summary"><meta name="twitter:title" content="Wikipedia — Fix My Brainrot"><meta name="twitter:description" content="Read a random Wikipedia article selected for a useful, readable introduction.">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <main class="page-main site-shell activity-layout">
-    <div class="activity-top"><a class="back-link" href="index.html">← Activities</a><p class="activity-description"><span>One random article from Wikipedia.</span><button class="info-button" type="button" data-info-dialog="wikipedia-info" aria-label="How Wikipedia works"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 10.5v5.25M12 7.5h.01" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path></svg></button></p></div>
+    <div class="activity-top"><a class="back-link" href="/">← Activities</a><p class="activity-description"><span>One random article from Wikipedia.</span><button class="info-button" type="button" data-info-dialog="wikipedia-info" aria-label="How Wikipedia works"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 10.5v5.25M12 7.5h.01" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path></svg></button></p></div>
     <section class="panel"><p id="article-status" class="status" aria-live="polite">Loading an article…</p><article id="article" class="article-card" hidden><h2 id="article-title"></h2><p id="article-extract" class="intro"></p><a id="article-link" href="#" target="_blank" rel="noreferrer">Read full article on Wikipedia ↗</a></article><br><div class="controls"><button id="next-article" class="secondary" type="button">Next article</button></div></section>
   </main>
   <dialog id="wikipedia-info" class="info-dialog" aria-labelledby="wikipedia-info-title"><div class="info-dialog-content"><h2 id="wikipedia-info-title">How it works</h2><p>Read a short introduction to one randomly selected Wikipedia article. Follow the link if you want to explore the full article, or choose “Next article”.</p><button class="secondary info-dialog-close" type="button" data-dialog-close>Close</button></div></dialog>

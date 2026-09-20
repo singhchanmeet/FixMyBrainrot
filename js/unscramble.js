@@ -122,6 +122,7 @@ function nextPuzzle() {
 }
 
 document.addEventListener('keydown', event => {
+  if (event.target.closest('select, input, textarea')) return;
   if (solved) return;
   if (event.key === 'Backspace') {
     event.preventDefault();
