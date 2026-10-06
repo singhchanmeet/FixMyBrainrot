@@ -39,6 +39,8 @@ h3 { margin-bottom: .4rem; font-size: 1.05rem; }
 .activity-card { display: block; min-height: 145px; padding: 1.25rem; border: 1px solid var(--line); text-decoration: none; transition: border-color .15s ease, background .15s ease; }
 .activity-card:hover { border-color: #777; background: var(--surface); }
 .activity-card p { margin-bottom: 0; color: var(--muted); }
+.activity-title-text { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .14em; }
+.activity-click-icon { display: inline-block; width: .85em; height: .85em; margin-left: .3em; color: var(--muted); fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.08em; }
 .activity-icon { display: block; margin-bottom: 1rem; color: var(--muted); }
 .activity-layout { max-width: 720px; margin: 0 auto; }
 .about-page { max-width: 760px; }
