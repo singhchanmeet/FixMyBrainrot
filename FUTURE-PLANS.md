@@ -1,6 +1,6 @@
 # Future plans
 
-This document records ideas discussed for Fix My Brainrot that are not part of the current activity set. It is intentionally a plan, not a promise that every item will be built.
+This document records activities and ideas discussed for Fix My Brainrot. Completed activities are listed separately from ideas that remain future possibilities; inclusion is not a promise that every item will be built.
 
 ## Product principles
 
@@ -14,44 +14,19 @@ Future activities should continue to be:
 - Generated or selected from transparent, documented datasets
 - Free from avoidable ambiguity and low-quality generated content
 
-## Possible next activities
+## Implemented activities
 
 ### Anagrams
 
-Recommended as the next activity.
+Implemented as **Unscramble**.
 
-Current direction:
-
-- Use a curated, common-word subset rather than the entire dictionary asset
-- Prefer words in the 6–10 letter range
-- Use word length internally as a difficulty signal if needed
-- Avoid user-facing modes initially
-- Generate a Fisher–Yates shuffle in the browser
-- Reject scrambles that are unchanged, nearly unchanged, simple adjacent transpositions, or that preserve too many original adjacent sequences
-- Provide direct typing with a simple correct/incorrect flow
-- No timer, score, hints, streaks, or attempt history
-
-The word source and filtering process still need to be finalized. The current WordNet-derived dictionary is not suitable as-is because it contains too many obscure, technical, inflected, and linguistically unusual entries.
+The activity uses a curated subset from the bundled dictionary data, including definitions and examples. It accepts five-letter words and longer words, uses difficulty modes, and filters for unique, unambiguous anagram groups. Scrambles are generated in the browser and avoid unchanged or overly similar letter arrangements. No timer, score, hints, streak, or attempt history is used.
 
 ### Futoshiki
 
-Recommended after Anagrams.
+Implemented with browser-generated puzzles and unique-solution validation. Difficulty uses 4×4, 5×5, and 6×6 grids. Inequality symbols are oriented to match the direction of comparison, and entries receive immediate feedback.
 
-Current direction:
-
-- Easy: 4×4
-- Medium: 5×5
-- Hard: 6×6
-- Generate a complete Latin square by backtracking
-- Add inequality signs that agree with the generated solution
-- Remove number clues while retaining exactly one solution
-- Use a constraint solver with propagation and capped solution counting
-- Prefer puzzles solvable by deduction rather than puzzles requiring speculative guessing
-- Use the same immediate feedback philosophy as Sudoku
-
-Difficulty should depend on more than grid size. Inequality density, starting givens, chain length, and the depth of deductions should also be considered.
-
-Useful conceptual references include PuzzIt's documented Latin-square, inequality, and uniqueness-removal approach, and open-source Futoshiki solvers. Any implementation should be written independently and checked for license compatibility.
+## Possible future activities
 
 ### Word crossword
 
@@ -94,14 +69,7 @@ Not prioritized because they risk becoming text-heavy and interrupting the site'
 
 ## Dataset work
 
-The Dictionary activity needs a better candidate dataset or a better filtering pipeline. Options under consideration include:
-
-- A carefully filtered WordNet subset
-- Structured English Wiktionary data extracted through Kaikki/Wiktextract
-- A Wiktionary-derived open dictionary such as `open-dictionary`
-- A frequency-ranked filtering stage, subject to documenting the source and license correctly
-
-The final choice should balance common vocabulary, definition quality, licensing, bundle size, and the project's preference for no runtime dictionary API.
+The Dictionary activity now uses bundled Wordset data, with filtering and attribution documented in [DATA-SOURCES.md](DATA-SOURCES.md) and [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Future dataset changes should preserve useful definitions and examples, maintain acceptable bundle and load times, and respect the source license.
 
 ## Current activities
 
@@ -110,8 +78,10 @@ The current activity order on the landing page is:
 1. Dictionary
 2. Mental Math
 3. Sudoku
-4. Wikipedia
-5. Remember the Pattern
-6. Five Letters (Wordle-style)
+4. Unscramble
+5. Wikipedia
+6. Remember the Pattern
+7. Five Letters (Wordle-style)
+8. Futoshiki
 
 The existing product principles remain unchanged: no login, no ads, no fancy interface, no music, no streaks or achievements, no leaderboards or comparisons, no unnecessary gamification, and no data stored.
